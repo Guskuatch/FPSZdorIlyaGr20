@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator Animator;
+
     public float gravity = 9.8f;
     public float jumpForce;
     public float speed;
@@ -40,10 +42,20 @@ public class PlayerController : MonoBehaviour
             _moveVector -= transform.right;
         }
 
+        if(_moveVector != Vector3.zero)
+        {
+            Animator.SetBool("isRun", true);
+        }
+        else
+        {
+            Animator.SetBool("isRun", false);
+        }
+
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && _charcterController.isGrounded)
         {
             _fallVelocity = -jumpForce;
+            Animator.SetBool("isGrounded", false);
         }
     }
 
@@ -57,10 +69,10 @@ public class PlayerController : MonoBehaviour
         _charcterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
 
         // Stop fall fast
-
         if (_charcterController.isGrounded)
         {
             _fallVelocity = 0;
+            Animator.SetBool("isGrounded", true);
         }
     }
 }
