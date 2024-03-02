@@ -11,6 +11,9 @@ public class FireBall : MonoBehaviour
     void Start()
     {
         Invoke("DestoryFireBall", lifetime);
+
+        //Через сколько уничтожить объект, если он не соприкасается
+        //Destroy(gameObject,5)
     }
 
     private void FixedUpdate()

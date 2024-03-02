@@ -8,6 +8,12 @@ public class FireBallSource : MonoBehaviour
     public Camera cameraLink;
     public float targetInSkyDistance;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void Update()
     {
         FireBallSourceLookAtTargetPoint();
