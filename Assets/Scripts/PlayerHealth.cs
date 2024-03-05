@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float MaxValue = 100;
+    public float _maxValue = 100;
     public RectTransform valueRectTransform;
     //public Slider Healthbar;
     public GameObject gameplayUI;
@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         //В начале игры задаем текущее здоровье максимальным значением
-        _currentValue = MaxValue;
+        _currentValue = _maxValue;
         UpdateHealthbar();
     }
 
@@ -32,11 +32,18 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthbar();
     }
 
+    public void AddHealth(float amount)
+    {
+        _currentValue += amount;
+        _currentValue = Mathf.Clamp(_currentValue, 0, _maxValue);
+        UpdateHealthbar();
+    }   
+
     void UpdateHealthbar()
     {
         //обновить Healthbar.value текущим значением здоровья (от 0 до 1)
         //Healthbar.value = _currentValue/MaxValue;
-        valueRectTransform.anchorMax = new Vector2(_currentValue / MaxValue, 1);
+        valueRectTransform.anchorMax = new Vector2(_currentValue / _maxValue, 1);
     }
 
     private void PlayerIsDead()
