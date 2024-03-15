@@ -83,6 +83,7 @@ public class EnemyAI : MonoBehaviour
 
     private void PickNewPatrolPoint()
     {
+        //if (patrolPoints != null)
         //or just check this (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
         _navMeshAgent.destination = patrolPoints[Random.Range(0, patrolPoints.Count)].position;
     }
