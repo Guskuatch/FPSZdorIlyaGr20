@@ -3,7 +3,10 @@ guid: 82eca47839a0e834eb134ae50edc8ac1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - expolsionPrefab: {instanceID: 0}
+  - sourceExplosion: {instanceID: 0}
+  - clipExplosion: {fileID: 8300000, guid: 10f365c10563575429fa2230f2fbbe81, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

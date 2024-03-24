@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82eca47839a0e834eb134ae50edc8ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 50
   delay: 3
   expolsionPrefab: {fileID: 7226365711049898732, guid: d91a93eafb401324d907a89cc4f2ef13,
     type: 3}

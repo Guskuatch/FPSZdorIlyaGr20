@@ -15,6 +15,12 @@ public class PlayerProgress : MonoBehaviour
     private float _experienceCurrentValue = 0;
     private float _experienceTargetValue = 100;
 
+    private void Start()
+    {
+        SetLevel(_levelValue);
+        //DrawUI();
+    }
+
     private void Update()
     {
         DrawUI();
@@ -25,9 +31,25 @@ public class PlayerProgress : MonoBehaviour
         _experienceCurrentValue += value;
         if (_experienceCurrentValue >= _experienceTargetValue)
         {
-            _levelValue += 1;
+            SetLevel(_levelValue + 1);
             _experienceCurrentValue = 0;
         }
+    }
+
+    private void SetLevel(int value)
+    {
+        _levelValue = value;
+
+        var currentLevel = levels[_levelValue - 1];
+        _experienceTargetValue = currentLevel.experienceForTheNextLevel;
+        GetComponent<FireBallCaster>().damage = currentLevel.fireballDamage;
+
+        var grenadeCaster = GetComponent<GrenadeCaster>();
+        grenadeCaster.damage = currentLevel.grenadeDamage;
+        if (currentLevel.grenadeDamage < 0)
+            grenadeCaster.enabled = false;
+        else
+            grenadeCaster.enabled = true;
     }
 
     private void DrawUI()

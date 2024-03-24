@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     public Animator animator;
+    public AudioSource walkSound;
+    public AudioClip clipWalk;
+
+    public float minMoveDistance = 1f;
+
+    private Vector3 _previousPosition;
 
     private Vector3 _moveVector;
     private float _fallVelocity = 0;
@@ -18,18 +24,21 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _charcterController = GetComponent<CharacterController>();
+        _previousPosition = transform.position;
     }
 
     void Update()
     {
         MovementUpdate();
         JumpUpdate();
+        
     }
 
     void FixedUpdate()
     {
         // Movement
         _charcterController.Move(_moveVector * speed * Time.deltaTime);
+        PlaySound();
 
         // Fall and Jump
         _fallVelocity += gravity * Time.fixedDeltaTime;
@@ -40,6 +49,20 @@ public class PlayerController : MonoBehaviour
         {
             _fallVelocity = 0;
             animator.SetBool("isGrounded", true);
+        }
+    }    
+
+    private void PlaySound()
+    {
+        //walkSound.Play();
+
+        float moveDistance = Vector3.Distance(transform.position, _previousPosition);
+
+        if (moveDistance >= minMoveDistance)
+        {
+            walkSound.PlayOneShot(clipWalk);
+
+            _previousPosition = transform.position;
         }
     }
 
@@ -69,6 +92,12 @@ public class PlayerController : MonoBehaviour
             _moveVector -= transform.right;
             runDirection = 4;
         }
+        //if (runDirection > 0)
+        //    {
+        //        Invoke("PlaySound", 2);
+        //    }
+            
+        //else walkSound.Stop();
 
         //Old version
         //if (_moveVector != Vector3.zero)

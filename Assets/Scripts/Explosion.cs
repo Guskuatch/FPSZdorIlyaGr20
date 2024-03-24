@@ -8,6 +8,14 @@ public class Explosion : MonoBehaviour
     public float maxSize = 5;
     public float speed = 1;
 
+    public AudioSource sourceExplosion;
+    public AudioClip clipExplosion;
+
+    private void OnAwake()
+    {    
+        sourceExplosion.PlayOneShot(clipExplosion);
+    }
+
     private void Start()
     {
         transform.localScale = Vector3.zero;

@@ -10,13 +10,18 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverScreen;
     public Animator animator;
 
-    float _currentValue;
+    public float _currentValue;
 
     void Start()
     {
         //В начале игры задаем текущее здоровье максимальным значением
         _currentValue = _maxValue;
         UpdateHealthbar();
+    }
+
+    public bool isAlive()
+    {
+        return _currentValue > 0;
     }
 
     public void TakeDamage(float Damage)
